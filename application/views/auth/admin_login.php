@@ -42,5 +42,78 @@
         </div>
 
     </div>
+    <!-- Glass Admin Info Popup -->
+<div id="adminPopup" class="glass-popup-overlay">
+    <div class="glass-popup">
+        <div class="popup-icon">
+            <i class="fas fa-user-shield"></i>
+        </div>
+
+        <h2>Login Administrator</h2>
+
+        <p class="popup-desc">
+            Gunakan akun administrator berikut untuk mengakses dashboard.
+        </p>
+
+        <div class="credential-box">
+            <div>
+                <span>Username</span>
+                <strong>admin</strong>
+            </div>
+            <div>
+                <span>Password</span>
+                <strong>admin123</strong>
+            </div>
+        </div>
+
+        <button id="closePopup" class="popup-btn">
+            OK, Mengerti
+        </button>
+
+        <div class="popup-timer">
+            Menutup otomatis dalam <span id="countdown">10</span> detik
+        </div>
+    </div>
+</div>
 </body>
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const popup = document.getElementById("adminPopup");
+    const closeBtn = document.getElementById("closePopup");
+    const countdown = document.getElementById("countdown");
+
+    let seconds = 10;
+
+    setTimeout(()=>{
+        popup.classList.add("show");
+    },400);
+
+    const timer = setInterval(() => {
+
+        seconds--;
+        countdown.textContent = seconds;
+
+        if(seconds <= 0){
+            closePopup();
+        }
+
+    },1000);
+
+    function closePopup(){
+
+        popup.classList.remove("show");
+        popup.classList.add("hide");
+
+        clearInterval(timer);
+
+        setTimeout(()=>{
+            popup.style.display="none";
+        },500);
+    }
+
+    closeBtn.addEventListener("click", closePopup);
+
+});
+</script>
