@@ -175,6 +175,109 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* =============================
+   Premium Sidebar Account Dropdown
+   ============================= */
+.user-menu {
+    position: relative;
+    margin-top: 12px;
+}
+
+.user-menu-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: var(--radius-pill);
+    padding: 14px 16px;
+    cursor: pointer;
+    color: var(--text-main);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    transition: all .25s ease;
+}
+
+.user-menu-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
+}
+
+.user-menu-btn:active {
+    transform: translateY(0);
+    opacity: 0.98;
+}
+
+.user-menu-btn i {
+    color: var(--text-main);
+}
+
+.user-menu-caret {
+    transition: transform .22s ease;
+    opacity: 0.9;
+}
+
+.user-menu-dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 10px);
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+
+    padding: 10px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(var(--glass-blur, 35px));
+    -webkit-backdrop-filter: blur(var(--glass-blur, 35px));
+
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.14);
+    z-index: 10000;
+}
+
+.user-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 13px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all .22s ease;
+}
+
+.user-menu-item i {
+    width: 18px;
+    text-align: center;
+}
+
+.user-menu-item:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+}
+
+.user-menu.open .user-menu-dropdown {
+    display: flex;
+}
+
+.user-menu.open .user-menu-caret {
+    transform: rotate(180deg);
+}
+
+
 /* Main Content Area */
 .main-area {
     flex: 1;
@@ -182,8 +285,16 @@ body {
     flex-direction: column;
     gap: 24px;
     width: calc(100% - 280px);
+}.main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: calc(100% - 280px);
 }
-
+.main-area{
+    position: relative;
+}
 .patient-wrapper {
     width: 100%;
     min-height: 100vh;
@@ -222,13 +333,121 @@ body {
 }
 
 /* Top Navbar */
-.top-nav {
+.top-nav{
+    position: sticky;
+    top: 20px;
+    z-index: 9999;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
-    margin-bottom: 4px;
-    /* Tighten spacing to match image */
+
+    padding: 14px 24px;
+    margin-bottom: 20px;
+
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.45) 0%,
+        rgba(255,255,255,.20) 100%
+    );
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border: 1px solid rgba(255,255,255,.30);
+    border-top: 1px solid rgba(255,255,255,.80);
+    border-left: 1px solid rgba(255,255,255,.60);
+
+    border-radius: var(--radius-pill);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.05);
+
+    transition: all .35s ease;
+}
+.top-nav.scrolled{
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.65) 0%,
+        rgba(255,255,255,.35) 100%
+    );
+
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.10);
+}
+/* =========================
+   PREMIUM SCROLL EFFECT
+========================= */
+
+.top-nav.glass-pill{
+    transition:
+        backdrop-filter .4s ease,
+        background .4s ease,
+        box-shadow .4s ease,
+        transform .3s ease;
+}
+
+/* Saat user scroll */
+.top-nav.glass-pill.scrolled{
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter:
+        blur(55px)
+        saturate(220%)
+        brightness(1.1);
+
+    -webkit-backdrop-filter:
+        blur(55px)
+        saturate(220%)
+        brightness(1.1);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.15),
+        inset 0 1px 0 rgba(255,255,255,.45);
+
+    border-color: rgba(255,255,255,.25);
+}
+
+/* Efek kabut di bawah navbar */
+.top-nav.glass-pill::after{
+    content:'';
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:-35px;
+
+    height:50px;
+
+    pointer-events:none;
+
+    opacity:0;
+    transition:.4s ease;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,.15),
+        transparent
+    );
+
+    filter:blur(12px);
+}
+
+.top-nav.glass-pill.scrolled::after{
+    opacity:1;
+}
+.top-nav.glass-pill{
+    transition: all .35s ease;
+}.top-nav.glass-pill:hover{
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.45);
 }
 
 .search-box {
@@ -1648,9 +1867,9 @@ body.auth-body .col-6 {
     white-space: nowrap;
     width: 140px;
 }
-.topbar,
-.navbar,
-.header {
+.body.auth-body .topbar,
+body.auth-body .navbar,
+body.auth-body .header {
     position: fixed;
     top: 0;
     left: 0;
@@ -1659,6 +1878,7 @@ body.auth-body .col-6 {
     z-index: 9999;
     background: #fff;
     box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+
 }
 /* Overlay */
 .glass-popup-overlay{
@@ -1812,3 +2032,175 @@ body.auth-body .col-6 {
 .glass-popup-overlay.hide .glass-popup{
     transform:translateY(-30px) scale(.8);
 }
+#scroll-sentinel{
+    height:1px;
+    width:100%;
+}
+
+.top-nav.glass-pill.scrolled{
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:
+        blur(55px)
+        saturate(220%);
+
+    -webkit-backdrop-filter:
+        blur(55px)
+        saturate(220%);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.15),
+        inset 0 1px 0 rgba(255,255,255,.4);
+}
+:root{
+    --glass-bg: rgba(255,255,255,.22);
+    --glass-border: rgba(255,255,255,.35);
+    --glass-shadow:
+        0 8px 32px rgba(31,38,135,.12),
+        0 2px 12px rgba(0,0,0,.05),
+        inset 0 1px 0 rgba(255,255,255,.65);
+
+    --glass-blur: 35px;
+}
+
+/* =============================
+   MODERN UI ENHANCEMENT (NO THEME CHANGE)
+   - micro-interaction
+   - focus/typography polish
+   - table zebra + sticky header (optional)
+   - responsive niceties
+   ============================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Accessible focus */
+:focus {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(43, 108, 176, 0.35);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+/* Improve link + button interactions */
+a,
+.btn,
+.nav-item {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Consistent hover lift for glass-like blocks */
+.glass:hover,
+.glass-pill:hover,
+.card:hover,
+.auth-card:hover,
+.ticket-card .card:hover,
+.side-card .card:hover {
+    box-shadow: 0 14px 48px rgba(0, 0, 0, 0.08);
+}
+
+/* Buttons: subtle active */
+.btn:active {
+    transform: translateY(0);
+    opacity: 0.96;
+}
+
+/* Typography polish */
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Slightly smoother transitions for interactive elements */
+.nav-item,
+.top-nav,
+.card,
+.auth-card,
+.form-control,
+.table tbody tr,
+.detail-button {
+    transition: all .25s ease;
+}
+
+/* Table modern refinements */
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.table tbody tr:nth-child(odd) {
+    background: transparent;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+/* Status badge micro style */
+.status-badge {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+}
+
+/* Sidebar responsive niceties */
+@media (max-width: 992px) {
+    body {
+        padding: 16px;
+    }
+
+    .sidebar {
+        width: 220px;
+        padding: 24px 16px;
+        top: 10px;
+        height: auto;
+    }
+
+    .main-area {
+        width: 100%;
+    }
+
+    .patient-top {
+        left: 240px;
+        right: 16px;
+    }
+}
+
+@media (max-width: 560px) {
+    .patient-top {
+        position: static;
+        margin-bottom: 16px;
+    }
+
+    body {
+        padding: 12px;
+    }
+
+    .dash-grid,
+    .tracking-row,
+    .middle-row {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Reduce motion when user prefers */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+

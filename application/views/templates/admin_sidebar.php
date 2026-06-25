@@ -32,10 +32,22 @@
             </div>
         </div>
         
-        <a href="<?= base_url('auth/logout') ?>" class="btn-upgrade" onclick="return confirm('Logout dari sistem?')">
-            <i class="fas fa-sign-out-alt"></i> Logout System
-        </a>
+        <div class="user-menu">
+            <button class="user-menu-btn" type="button">
+                <i class="fas fa-user-cog"></i>
+                <span>Account</span>
+                <i class="fas fa-chevron-down user-menu-caret"></i>
+            </button>
+
+            <div class="user-menu-dropdown" role="menu" aria-label="User menu">
+                <a href="<?= base_url('auth/logout') ?>" class="user-menu-item" onclick="return confirm('Logout dari sistem?')" role="menuitem">
+                    <i class="fas fa-right-from-bracket"></i>
+                    <span>Logout System</span>
+                </a>
+            </div>
+        </div>
     </aside>
+
 
     <main class="main-area">
         <header class="top-nav glass-pill mb-4">
@@ -56,10 +68,13 @@
                 <button class="icon-btn"><i class="fas fa-moon"></i></button>
             </div>
         </header>
+        </header>
+
+        <!-- Sentinel untuk mendeteksi scroll -->
+        <div id="scroll-sentinel"></div>
 
         <!-- Flash Messages Global -->
         <?php if ($this->session->flashdata('success')): ?>
-            <div class="alert alert-success">
                 <i class="fas fa-check-circle"></i> <?= $this->session->flashdata('success') ?>
             </div>
         <?php endif; ?>
